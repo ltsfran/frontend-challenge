@@ -1,0 +1,54 @@
+{
+  "name": "frontend-challenge",
+  "version": "1.0.0",
+  "description": "Frontend Challenge",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "prepare": "husky install .husky",
+    "pre-commit": "next lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ltsfran/frontend-challenge.git"
+  },
+  "keywords": [
+    "react",
+    "next"
+  ],
+  "author": "Luis Tupa",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ltsfran/frontend-challenge/issues"
+  },
+  "homepage": "https://github.com/ltsfran/frontend-challenge#readme",
+  "dependencies": {
+    "@types/node": "18.11.9",
+    "@types/react": "18.0.25",
+    "@types/react-dom": "18.0.9",
+    "@types/styled-components": "5.1.26",
+    "next": "12.3.2",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-is": "18.2.0",
+    "rimraf": "3.0.2",
+    "styled-components": "5.3.6",
+    "typescript": "4.8.4"
+  },
+  "devDependencies": {
+    "@next/eslint-plugin-next": "12.3.2",
+    "@typescript-eslint/eslint-plugin": "5.41.0",
+    "@typescript-eslint/parser": "5.41.0",
+    "eslint": "8.26.0",
+    "eslint-config-next": "12.3.2",
+    "eslint-config-standard-with-typescript": "23.0.0",
+    "eslint-plugin-import": "2.26.0",
+    "eslint-plugin-n": "15.3.0",
+    "eslint-plugin-promise": "6.0.0",
+    "eslint-plugin-react": "7.30.1",
+    "husky": "8.0.2"
+  }
+}
