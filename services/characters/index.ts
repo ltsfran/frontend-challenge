@@ -3,7 +3,8 @@ import { fetchAjax } from '@lib/fetch'
 const CharacterService = {
   async getCharactersByQuery (query: string) {
     try {
-      const response = await fetchAjax(`http://localhost:3000/api/items?q=${query}`, { method: 'GET' })
+      const REST_API = process.env.REST_API ?? ''
+      const response = await fetchAjax(`${REST_API}/api/items?q=${query}`, { method: 'GET' })
       const data = await response.json()
 
       return {
