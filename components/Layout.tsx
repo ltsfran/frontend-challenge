@@ -71,6 +71,15 @@ const Content = styled.div`
   }
 `
 
+const Main = styled.main`
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100%;
+  position: relative;
+`
+
 const Layout: React.FC<React.PropsWithChildren> = ({ children }) => {
   useFullScreenHeight()
 
@@ -82,7 +91,9 @@ const Layout: React.FC<React.PropsWithChildren> = ({ children }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Content>
-        {children}
+        <Main>
+          {children}
+        </Main>
       </Content>
     </Wrapper>
   )
