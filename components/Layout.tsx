@@ -76,7 +76,6 @@ const Main = styled.main`
   display: flex;
   flex-wrap: wrap;
   width: 100%;
-  height: 100%;
   position: relative;
 `
 
