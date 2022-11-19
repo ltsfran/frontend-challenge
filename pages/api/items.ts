@@ -1,4 +1,5 @@
 import { NextApiHandler } from 'next'
+import { capitalizeFirstLetter } from '@utils'
 
 interface Origin {
   name: string
@@ -36,7 +37,7 @@ const hydrateData = (data: ResultDTO[]): ResultModel[] => {
     origin: item.origin,
     location: item.location,
     image: item.image,
-    description: `${item.status} ${item.species}`
+    description: capitalizeFirstLetter(`${item.status} - ${item.species}`)
   }))
 }
 

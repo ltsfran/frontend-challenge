@@ -1,5 +1,6 @@
-import { NextPage } from 'next'
+import { GetServerSideProps, NextPage } from 'next'
 import styled from 'styled-components'
+import CharacterService from '@services/characters'
 import Layout from '@components/Layout'
 import Card from '@components/Card'
 
@@ -26,21 +27,66 @@ const CardGroup = styled.div`
   box-sizing: border-box;
 `
 
-const ListingPage: NextPage = () => (
+interface Origin {
+  name: string
+  url: string
+}
+
+interface Character {
+  id: number
+  name: string
+  gender: string
+  origin: Origin
+  location: Origin
+  image: string
+  description: string
+}
+
+interface Props {
+  characters: Character[]
+}
+
+const ListingPage: NextPage<Props> = ({ characters }) => (
   <Layout>
     <Title>Characters</Title>
-    <SubTitle>4 results found</SubTitle>
+    { characters.length > 0
+      ? <SubTitle>{characters.length} results found</SubTitle>
+      : <SubTitle>No results found</SubTitle>}
     <CardGroup>
-      {Array.from({ length: 4 }).map((item, index) => (
+      {characters.map((item, index) => (
         <Card
           key={index}
           index={index}
-          imageUrl="https://rickandmortyapi.com/api/character/avatar/25.jpeg"
-          title="Summer Smith"
-          subTitle="Alive - Human" />
+          imageUrl={item.image}
+          title={item.name}
+          subTitle={item.description} />
       ))}
     </CardGroup>
   </Layout>
 )
+
+export const getServerSideProps: GetServerSideProps<any> = async (context) => {
+  const { query } = context
+  const searchQuery = query.search as string
+  const {
+    data: characters,
+    error
+  } = await CharacterService.getCharactersByQuery(searchQuery)
+
+  if (error !== undefined) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false
+      }
+    }
+  }
+
+  return {
+    props: {
+      characters
+    }
+  }
+}
 
 export default ListingPage
