@@ -42,6 +42,7 @@ const Search: React.FC<SearchProps> = ({
       <InputText
         type="text"
         placeholder="Search character..."
+        value={value}
         onChange={handleChange}
         onKeyDown={handleKeyDown} />
     </Label>
