@@ -48,20 +48,22 @@ interface Props {
 
 const ListingPage: NextPage<Props> = ({ characters }) => (
   <Layout>
-    <Title>Characters</Title>
-    { characters.length > 0
-      ? <SubTitle>{characters.length} results found</SubTitle>
-      : <SubTitle>No results found</SubTitle>}
-    <CardGroup>
-      {characters.map((item, index) => (
-        <Card
-          key={index}
-          index={index}
-          imageUrl={item.image}
-          title={item.name}
-          subTitle={item.description} />
-      ))}
-    </CardGroup>
+    <div>
+      <Title>Characters</Title>
+      { characters.length > 0
+        ? <SubTitle>{characters.length} results found</SubTitle>
+        : <SubTitle>No results found</SubTitle>}
+      <CardGroup>
+        {characters.map((item, index) => (
+          <Card
+            key={index}
+            index={index}
+            imageUrl={item.image}
+            title={item.name}
+            subTitle={item.description} />
+        ))}
+      </CardGroup>
+    </div>
   </Layout>
 )
 
