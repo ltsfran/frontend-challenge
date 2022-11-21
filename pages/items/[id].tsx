@@ -1,20 +1,57 @@
-import { NextPage } from 'next'
+import { GetServerSideProps, NextPage } from 'next'
+import CharacterService from '@services/characters'
 import Layout from '@components/Layout'
 import Detail from '@components/Detail'
 
-const ItemPage: NextPage = () => (
+interface Section {
+  label: string
+  text: string
+}
+
+interface Character {
+  id: number
+  name: string
+  sections: Section[]
+  image: string
+  description: string
+}
+
+interface Props {
+  character: Character
+}
+
+const ItemPage: NextPage<Props> = ({ character }) => (
   <Layout>
     <Detail
-      imageUrl="https://rickandmortyapi.com/api/character/avatar/25.jpeg"
-      title="Armothy"
-      subTitle="Alive - Alien"
-      sections={[
-        { label: 'Gender', text: 'Male' },
-        { label: 'Type', text: 'Self-aware arm' },
-        { label: 'Last known location', text: 'unknown' },
-        { label: 'First seed in', text: 'Auto Erotic Assimilation' }
-      ]}/>
+      imageUrl={character.image}
+      title={character.name}
+      subTitle={character.description}
+      sections={character.sections}/>
   </Layout>
 )
+
+export const getServerSideProps: GetServerSideProps<any> = async (context) => {
+  const { query } = context
+  const idQuery = parseInt(query.id as string ?? '')
+  const {
+    data: character,
+    error
+  } = await CharacterService.getCharacterById(idQuery)
+
+  if (error !== undefined) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false
+      }
+    }
+  }
+
+  return {
+    props: {
+      character
+    }
+  }
+}
 
 export default ItemPage

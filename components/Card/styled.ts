@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
-export const CardBox = styled.div`
+export const CardBox = styled.a`
+  text-decoration: none;
   display: flex;
   align-items: center;
   column-gap: 1.5rem;

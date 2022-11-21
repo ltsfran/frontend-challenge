@@ -56,6 +56,7 @@ const ListingPage: NextPage<Props> = ({ characters }) => (
       <CardGroup>
         {characters.map((item, index) => (
           <Card
+            to={`/items/${item.id}`}
             key={index}
             index={index}
             imageUrl={item.image}
@@ -73,7 +74,7 @@ export const getServerSideProps: GetServerSideProps<any> = async (context) => {
   const {
     data: characters,
     error
-  } = await CharacterService.getCharactersByQuery(searchQuery)
+  } = await CharacterService.getAllCharactersByQuery(searchQuery)
 
   if (error !== undefined) {
     return {
