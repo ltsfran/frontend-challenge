@@ -12,6 +12,7 @@ export const CardDescription = styled.div`
   display: flex;
   flex-wrap: wrap;
   row-gap: 0.25rem;
+  flex: 1;
 `
 
 export const CardTitle = styled.div`
