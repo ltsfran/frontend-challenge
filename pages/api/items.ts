@@ -49,7 +49,7 @@ const handler: NextApiHandler = async (req, res) => {
   try {
     let data
 
-    if (queryFilter === undefined || queryFilter === '') {
+    if (queryFilter === 'undefined' || queryFilter === undefined || queryFilter === '') {
       const response = await fetch('https://rickandmortyapi.com/api/character')
       data = await response.json()
     } else {
@@ -66,7 +66,9 @@ const handler: NextApiHandler = async (req, res) => {
     }
 
     const results: ResultDTO[] = data.results
-    const filterResults = results.filter((item, index) => index < limit)
+    const filterResults = results
+      .sort(() => Math.random() - Math.random())
+      .filter((item, index) => index < limit)
     return res.status(200).json({
       message: 'Successful',
       data: hydrateData(filterResults)
